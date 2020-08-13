@@ -52,4 +52,39 @@ class Particle {
         ctx.fill();
 
     }
+
+
+    update() {
+
+
+        let dx = muis.x - this.x;
+        let dy = muis.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let forceDirectionX = dx / distance;
+        let forceDirectionY = dy / distance;
+        let maxDistance = muis.radius;
+        let force = (maxDistance - distance) / maxDistance;
+        let directionX = forceDirectionX * force * this.density;
+        let directionY = forceDirectionY * force * this.density;
+        if (distance < muis.radius) {
+            this.x -= directionX;
+            this.y -= directionY;
+        } else {
+            if (this.x !== this.baseX) {
+
+                let dx = this.x - this.baseX;
+                this.x -= dx / 10;
+            }
+            if (this.y !== this.baseY) {
+
+                let dy = this.y - this.baseY;
+                this.y -= dy / 10;
+            }
+
+
+
+        }
+
+    }
+
 }
